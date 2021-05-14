@@ -1,36 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-
-</head>
-<body>
-
-<div id="app"></div>
-
-<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script type="text/babel">
-  class App extends React.Component {
-    constructor() {
-      super()
-      this.state = {
-        message: 'hello React',
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      #app {
+        display: flex;
+        justify-content: center;
       }
-    }
+      .root {
+        width: 1080px;
+        background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    render() {
-      return (
-          <div>
-            <p>{this.state.message}</p>
-          </div>
-      )
-    }
-  }
+      .title {
+        color: red;
+      }
 
-  ReactDOM.render(<App />, document.getElementById('app'))
-</script>
-</body>
+      .content {
+        box-sizing: border-box;
+        width: 80%;
+        border: 1px solid black;
+        padding: 5px;
+      }
+
+      .evaluateBox {
+        width: 80%;
+        min-height: 100px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .evaluateItem {
+        width: 96%;
+        min-height: 100px;
+      }
+
+      .senderProfile {
+        display: flex;
+      }
+
+      .headImg {
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .evaluate {
+        margin-top: 10px;
+        width: 96%;
+      }
+
+      .sendEvaluate {
+        width: 80%;
+        min-height: 120px;
+        margin-top: 10px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .inputText {
+        width: 96%;
+        height: 80px;
+        background-color: #ccc;
+        border: none;
+      }
+
+      .sendSubmit {
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            message:
+              "你知道有这么一个团队吗？他们怀揣梦想，艰苦奋斗，作为一群大学生菜鸟，放弃了平时娱乐的时间，选择一起学习，一起成长，将平时学习的笔记，心得总结为文章，目的很简单，希望可以帮助向他们一样的菜鸟们？你想了解更多吗？快搜索微信公众号：小和山的菜鸟们，加入他们吧！",
+            evaluateList: [
+              {
+                imgUrl: "https://xhs-rookies.com/img/rookie-icon.png",
+                nickName: "菜鸟一号",
+                sendTime: "2021.05.14",
+                evaluate:
+                  "这是一个即将推出系列文章的团队，我们一起期待他们的作品吧！",
+              },
+            ],
+            inputMess: "",
+          };
+        }
+
+        render() {
+          return (
+            <div className="root">
+              <div className="title">Hello React</div>
+              <p className="content">{this.state.message}</p>
+              <div className="evaluateBox">
+                <div>大伙的评论</div>
+                {/* 遍历留言列表 */}
+                {this.state.evaluateList.map((item) => {
+                  return (
+                    <div className="evaluateItem">
+                      <div className="senderProfile">
+                        <img className="headImg" src={item.imgUrl} />
+                        <div className="nickNameBox">
+                          <div>{item.nickName}</div>
+                          <div>{item.sendTime}</div>
+                        </div>
+                      </div>
+                      <div className="evaluate">{item.evaluate}</div>
+                      <hr />
+                    </div>
+                  );
+                })}
+              </div>
+              {/* 留言输入框 */}
+              <div className="sendEvaluate">
+                <textarea
+                  className="inputText"
+                  placeholder="请输入评论..."
+                  value={this.state.inputMess}
+                  onChange={(e) => this.getEvaluate(e)}
+                />
+                <button
+                  className="sendSubmit"
+                  onClick={() => this.sendSubmit()}
+                >
+                  发表
+                </button>
+              </div>
+            </div>
+          );
+        }
+        // 获取输入内容
+        getEvaluate(e) {
+          console.log(e.target.value);
+          this.setState({
+            inputMess: e.target.value,
+          });
+        }
+        // 发送留言并清空输入框
+        sendSubmit() {
+          let data = [
+            {
+              imgUrl: "https://xhs-rookies.com/img/rookie-icon.png",
+              nickName: "菜鸟一号",
+              sendTime: "2021.05.14",
+              evaluate: this.state.inputMess,
+            },
+          ];
+          this.setState({
+            // 将原数据和新数据插入 留言列表
+            evaluateList: [ ...data,...this.state.evaluateList],
+            inputMess:''
+          });
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
 </html>
