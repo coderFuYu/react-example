@@ -1,11 +1,24 @@
-import './App.css';
+import React, { PureComponent } from 'react'
+import EvaluateCompoent from './components/EvaluateCompoent/EvaluateCompoent'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
+export class App extends PureComponent {
+  constructor(props) {
+   super(props);
+   this.state = {
+     evaluateList = [{
 
-    </div>
-  );
+     }]
+   }
+  }
+  render() {
+    return (
+      <div>
+        <EvaluateCompoent evaluateList={this.state.evaluateList}/>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
+

@@ -1,0 +1,72 @@
+.evaluateBox {
+    width: 1280px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .titleText {
+    width: 1280px;
+    color: #333333;
+    font-family: Source Han Sans CN;
+    font-weight: medium;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+    border-bottom: 2px solid #ececec;
+    align-self: flex-start;
+  }
+
+  .evaluateItem {
+    width: 1280px;
+    min-height: 100px;
+    display: flex;
+    padding: 30px;
+  }
+
+  .senderProfile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headImg {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  .nickName {
+    color: #333333;
+    font-family: Source Han Sans CN;
+    font-weight: regular;
+    font-size: 22px;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+
+  .sendTime {
+    height: 27px;
+    color: #999999;
+    font-family: Source Han Sans CN;
+    font-weight: regular;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+  .evaluate {
+    margin-top: 10px;
+    width: 1200px;
+    border-bottom: 2px solid #ececec;
+    color: #333333;
+    font-family: Source Han Sans CN;
+    font-weight: regular;
+    font-size: 24px;
+    line-height: normal;
+    letter-spacing: 0px;
+    text-align: left;
+    padding-bottom: 10px;
+  }
