@@ -9,8 +9,8 @@
         justify-content: center;
       }
       .root {
-        width: 1080px;
-        background-color: #ccc;
+        width: 1440px;
+        background-color: #ffffff;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -22,60 +22,124 @@
 
       .content {
         box-sizing: border-box;
-        width: 80%;
-        border: 1px solid black;
-        padding: 5px;
+        width: 1289px;
+        color: #333333;
+        font-family: Source Han Sans CN;
+        font-weight: regular;
+        font-size: 28px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
       }
 
       .evaluateBox {
-        width: 80%;
+        width: 1280px;
         min-height: 100px;
-        border: 1px solid black;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
 
+      .titleText {
+        width: 1280px;
+        color: #333333;
+        font-family: Source Han Sans CN;
+        font-weight: medium;
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
+        border-bottom: 2px solid #ececec;
+        align-self: flex-start;
+      }
+
       .evaluateItem {
-        width: 96%;
+        width: 1280px;
         min-height: 100px;
+        display: flex;
+        padding: 30px;
       }
 
       .senderProfile {
         display: flex;
-      }
-
-      .headImg {
-        width: 44px;
-        height: 44px;
-        margin-right: 10px;
-        border-radius: 50%;
-      }
-
-      .evaluate {
-        margin-top: 10px;
-        width: 96%;
-      }
-
-      .sendEvaluate {
-        width: 80%;
-        min-height: 120px;
-        margin-top: 10px;
-        border: 1px solid black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
       }
 
+      .headImg {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+      .nickName {
+        color: #333333;
+        font-family: Source Han Sans CN;
+        font-weight: regular;
+        font-size: 22px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
+      }
+
+      .sendTime {
+        height: 27px;
+        color: #999999;
+        font-family: Source Han Sans CN;
+        font-weight: regular;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
+      }
+      .evaluate {
+        margin-top: 10px;
+        width: 1200px;
+        border-bottom: 2px solid #ececec;
+        color: #333333;
+        font-family: Source Han Sans CN;
+        font-weight: regular;
+        font-size: 24px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
+        padding-bottom: 10px;
+      }
+
+      .sendEvaluate {
+        width: 1280px;
+        min-height: 120px;
+        margin-top: 10px;
+        display: flex;
+      }
+      .inputBox {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
       .inputText {
-        width: 96%;
+        width: 1200px;
         height: 80px;
         background-color: #ccc;
         border: none;
+        border-radius: 10px;
+        background: #f6f6f6;
+        margin-bottom: 10px;
       }
 
       .sendSubmit {
+        width: 110px;
+        height: 43px;
+        color: #ffffff;
+        font-family: Source Han Sans CN;
+        font-weight: medium;
+        font-size: 22px;
+        line-height: 43px;
+        letter-spacing: 0px;
+        text-align: center;
+        border-radius: 10px;
+        background: #00a7de;
+      
       }
     </style>
   </head>
@@ -111,38 +175,40 @@
               <div className="title">Hello React</div>
               <p className="content">{this.state.message}</p>
               <div className="evaluateBox">
-                <div>大伙的评论</div>
+                <div className="titleText">大伙的评论</div>
                 {/* 遍历留言列表 */}
                 {this.state.evaluateList.map((item) => {
                   return (
                     <div className="evaluateItem">
+                      <img className="headImg" src={item.imgUrl} />
                       <div className="senderProfile">
-                        <img className="headImg" src={item.imgUrl} />
                         <div className="nickNameBox">
-                          <div>{item.nickName}</div>
-                          <div>{item.sendTime}</div>
+                          <div className="nickName">{item.nickName}</div>
+                          <div className="sendTime">{item.sendTime}</div>
                         </div>
+                        <div className="evaluate">{item.evaluate}</div>
                       </div>
-                      <div className="evaluate">{item.evaluate}</div>
-                      <hr />
                     </div>
                   );
                 })}
               </div>
               {/* 留言输入框 */}
               <div className="sendEvaluate">
-                <textarea
-                  className="inputText"
-                  placeholder="请输入评论..."
-                  value={this.state.inputMess}
-                  onChange={(e) => this.getEvaluate(e)}
+                <img
+                  className="headImg"
+                  src="https://xhs-rookies.com/img/rookie-icon.png"
                 />
-                <button
-                  className="sendSubmit"
-                  onClick={() => this.sendSubmit()}
-                >
-                  发表
-                </button>
+                <div className="inputBox">
+                  <textarea
+                    className="inputText"
+                    placeholder="请输入评论..."
+                    value={this.state.inputMess}
+                    onChange={(e) => this.getEvaluate(e)}
+                  />
+                  <div className="sendSubmit" onClick={() => this.sendSubmit()}>
+                    发表
+                  </div>
+                </div>
               </div>
             </div>
           );
@@ -166,8 +232,8 @@
           ];
           this.setState({
             // 将原数据和新数据插入 留言列表
-            evaluateList: [ ...data,...this.state.evaluateList],
-            inputMess:''
+            evaluateList: [...data, ...this.state.evaluateList],
+            inputMess: "",
           });
         }
       }
