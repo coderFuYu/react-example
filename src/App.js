@@ -12,7 +12,9 @@ class App extends PureComponent {
         headPortrait: 'https://xhs-rookies.com/img/rookie-icon.png',
         time: new Date(2021, 4, 14, 21, 2, 30),
         nickName: '小菜鸟',
-        detail: '这是一个即将推出系列文章的团队，我们一起期待他们的作品吧！'
+        detail: '这是一个即将推出系列文章的团队，我们一起期待他们的作品吧！',
+        liked: true,
+        likeNum: 23,
       }],
       text: ""
     }
@@ -24,38 +26,63 @@ class App extends PureComponent {
         <div className='App'>
           <h2>{title}</h2>
           <div className='desc'>{desc}</div>
-          <div className='comments'>
-            <p>评论</p>
-
-            {comments.map(item => {
-              return <Comment key={item.time.getTime()} {...item}/>
+          <div style={{width: '100%'}}>
+            <p className='commentsTitle'>评论</p>
+            {comments.map((item, index) => {
+              return <Comment key={item.time.getTime()} changeLike={() => {
+                this.changeLike(index)
+              }} {...item}/>
             })}</div>
 
           <div className='newComment'>
-            <textarea value={text} onChange={e => {
-              this.setState({text: e.target.value})
-            }} placeholder="请输入评论"></textarea>
-            <button onClick={() => {
+            <div style={{display: 'flex',}}>
+              <img src="https://xhs-rookies.com/img/rookie-icon.png" className="" alt=""/>
+              <textarea value={text} onChange={e => this.changeText(e)} placeholder="请输入评论"/>
+            </div>
+
+            <div className="submit" onClick={() => {
               this.addComment()
-            }}>发表评论
-            </button>
+            }}>发表
+            </div>
           </div>
         </div>
     );
   }
 
-  changeText() {
+  changeText(e) {
+    this.setState({text: e.target.value})
+  }
 
+  changeLike(index) {
+    let newArray = [...this.state.comments]
+    let newItem = {...newArray[index]}
+    if (newItem.liked) {
+      newItem.liked = false
+      newItem.likeNum -= 1
+    } else {
+      newItem.liked = true
+      newItem.likeNum += 1
+    }
+    newArray[index] = newItem
+    this.setState({
+      comments: newArray
+    })
   }
 
   addComment() {
+    if (!this.state.text) {
+      alert("请输入留言内容")
+      return;
+    }
     let detail = this.state.text
     this.setState({text: ''})
     let newComment = {
       headPortrait: 'https://xhs-rookies.com/img/rookie-icon.png',
       time: new Date(),
       nickName: '小菜鸟',
-      detail
+      detail,
+      liked: false,
+      likeNum: 0
     }
     this.setState({
       comments: [newComment, ...this.state.comments]
