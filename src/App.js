@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import Comment from "./comment";
+import checkRole from './checkRole'
 import "./App.css"
 
 class App extends PureComponent {
@@ -92,4 +93,4 @@ class App extends PureComponent {
 
 App.propTypes = {};
 
-export default App;
+export default checkRole(App);
