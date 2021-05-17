@@ -25,6 +25,9 @@ class App extends PureComponent {
     const {title, desc, comments, text} = this.state
     return (
         <div className='App'>
+          <span className="logout" onClick={() => {
+            this.handleLogout()
+          }}>退出登录</span>
           <h2>{title}</h2>
           <div className='desc'>{desc}</div>
           <div style={{width: '100%'}}>
@@ -48,6 +51,11 @@ class App extends PureComponent {
           </div>
         </div>
     );
+  }
+
+  handleLogout() {
+    window.localStorage.islogin = '0'
+    this.props.history.replace("/login")
   }
 
   changeText(e) {
