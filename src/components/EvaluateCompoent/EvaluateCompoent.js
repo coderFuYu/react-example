@@ -6,11 +6,11 @@ export class EvaluateCompoent extends Component {
         return (
             <div className="evaluateBox">
                 <div className="titleText">大伙的评论</div>
-                {/* 遍历留言列表 */}
+                {/* 接收留言列表参数并遍历展示 */}
                 {this.props.evaluateList.map((item) => {
                   return (
                     <div className="evaluateItem">
-                      <img className="headImg" src={item.imgUrl} />
+                      <img className="headImg" src={item.imgUrl} alt=''/>
                       <div className="senderProfile">
                         <div className="nickNameBox">
                           <div className="nickName">{item.nickName}</div>
