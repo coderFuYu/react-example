@@ -1,22 +1,20 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React  from 'react';
 import "./comment.css"
 
-class Comment extends PureComponent {
-  render() {
-    const {nickName, time, headPortrait, detail, liked, likeNum, changeLike} = this.props
+function Comment(props){
+    const {nickName, time, headPortrait, detail, liked, likeNum, changeLike} = props
     return (
         <div className='comment'>
           <div className='info'>
             <img src={headPortrait} alt="头像"/>
             <div>
               <p className='nickname'>{nickName}</p>
-              <p className='time'>{this.getTime(time)}</p>
+              <p className='time'>{getTime(time)}</p>
             </div>
           </div>
           <div className='detail' style={{marginBottom: '10px'}}>{detail}</div>
           <div className="toolBox">
-            <span className={'likeBox ' + (liked ? 'like' : 'unlike')} onClick={()=>changeLike()}>
+            <span className={'likeBox ' + (liked ? 'like' : 'unlike')} onClick={changeLike}>
               <span className="icon"> </span>
               <span>{(!!likeNum) && likeNum}</span>
             </span>
@@ -24,9 +22,8 @@ class Comment extends PureComponent {
           </div>
         </div>
     );
-  }
 
-  getTime(time) {
+  function getTime(time) {
     const year = time.getFullYear()
     const month = time.getMonth() + 1
     const day = time.getDate()
@@ -37,15 +34,7 @@ class Comment extends PureComponent {
   }
 }
 
-Comment.propTypes = {
-  nickName: PropTypes.string.isRequired,
-  time: PropTypes.object.isRequired,
-  headPortrait: PropTypes.string.isRequired,
-  detail: PropTypes.string.isRequired,
-  liked: PropTypes.bool.isRequired,
-  likeNum: PropTypes.number.isRequired,
-  changeLike: PropTypes.func.isRequired
-}
+
 
 export default Comment;
 
